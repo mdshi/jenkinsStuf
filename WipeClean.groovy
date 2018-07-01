@@ -11,7 +11,7 @@ def killStuckBuilds(job){
   def runningBuilds = getRunningBuilds(job)
   def jobName = job.name
   for(int j=0; j < runningBuilds.size(); j++){
-    int durationInSeconds = (System.currentTimeMillis() - runningBuilds[j].getTimeInMillis())/1000.0
+    int durationInSeconds = (System.currentTimeMillis() - runningBuilds[j].getTimeInMillis())/100.0
     result = false
     def buildId = runningBuilds[j].id
     println("Aborting ${jobName}-${buildId} which is running for ${durationInSeconds}s")
