@@ -29,6 +29,6 @@ node {
     def externalCall = load("stringInter.groovy")
 
     // We can just run it with "externalCall(...)" since it has a call method.
-    externalCall("Steve")   evaluate(new File("../t/Tools.groovy"))
+    externalCall("Steve")   
     }
 }
