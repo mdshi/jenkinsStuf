@@ -1,12 +1,8 @@
 import jenkins.model.Jenkins
 
 String[] JOBS_TO_WIPE=[
-  "CueingMiddleware",
-  "CueingMiddlewareH",
-  "HardwareDetector",
   "Hello1",
-  "Hello2",
-  "RemoteParker"  
+  "Hello2"
 ]
 
 
