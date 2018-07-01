@@ -13,4 +13,8 @@ void cleanUPtheNodes(Node node, item_to_clean)
     println("    Failed to find workspace path on ${node.name}.")
     return
     }
+
+    def mynameIs = "Mike"
+
+    println ${mynameIs}
 }
