@@ -7,5 +7,10 @@ second = 'Shiferaw'
 
 println evaluate(/"$myString"/)
 
-// Expected
-// 'https://hello:world@foobar.com'
+def multilineString = """
+Lorem ipsum dolor sit amet,
+consectetur adipiscing elit,
+sed do eiusmod tempor incididunt
+ut labore et dolore magna aliqua.
+"""
+println multilineString
