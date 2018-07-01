@@ -1,4 +1,3 @@
-import jenkins.model.Jenkins
 
 String [] Jobs_To_Be_Deleted = [
     "Hello"
