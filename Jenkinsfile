@@ -25,10 +25,10 @@ node {
         Write-Information 'We can change the focus to a soft blur or sharpen it to crystal clarity.'
     ''')
     println stdout
-  // Now load 'externalCall.groovy'.
-    def externalCall = load("stringInter.groovy")
+  // Now load 
+  evaluate(new File("./stringInter.groovy"))
 
-    // We can just run it with "externalCall(...)" since it has a call method.
-    externalCall("Steve")   
+    def thing = new Thing()
+    
     }
 }
