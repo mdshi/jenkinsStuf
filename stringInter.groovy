@@ -36,5 +36,5 @@ ${a} + ${b} = ${a+b}
 println multilineStringA
  
 
-def someMessage = "I love you!"'
+def someMessage = "I love you!"
 println someMessage
