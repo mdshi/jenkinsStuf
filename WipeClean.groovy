@@ -12,4 +12,5 @@ void cleanUPtheNodes(Node node, item_to_clean)
   if(!workspacePath){
     println("    Failed to find workspace path on ${node.name}.")
     return
+    }
 }
