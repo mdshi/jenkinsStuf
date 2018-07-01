@@ -34,7 +34,7 @@ is ${a+b}
 ${a} + ${b} = ${a+b} 
 """
 println multilineStringA
+ 
 
-
-def someMessage = powershell(returnStdout: true, script: 'Wite-Host "I love you!"')
+def someMessage = "I love you!"'
 println someMessage
