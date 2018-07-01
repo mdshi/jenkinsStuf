@@ -3,19 +3,5 @@ node {
     println msg
     def myname = "Mike Shiferaw"
     println myname
-
-    class MyClass {
-
-    def greeting = { myname -> "Hello, ${myname}!" }
-
-    MyClass() {
-    }
-
-    void sayHello(myname) {
-        println greeting(myname)
-    }
-}
 // some status check 
-
-
 }
