@@ -9,7 +9,7 @@ node {
 
 }
 node {
-    stage{
+    stage("Finally"){
         def stdout = powershell(returnStdout: true, script: '''
         # Enable streams 3-6
         $WarningPreference = 'Continue'
