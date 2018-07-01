@@ -25,6 +25,6 @@ node {
         Write-Information 'We can change the focus to a soft blur or sharpen it to crystal clarity.'
     ''')
     println stdout
-
+     evaluate(new File("stringInter.groovy"))
     }
 }
