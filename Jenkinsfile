@@ -1,5 +1,6 @@
 node {
-    stage('Compilation'){def externalyt = evaluate readTrusted("WipeClean.groovy")
+    stage('Compilation'){
+    def externalyt = evaluate readTrusted("WipeClean.groovy")
     println externalyt
     
     def jobName = 'Hello1'
@@ -12,8 +13,6 @@ node {
 // some status check 
     def someMessage = powershell(returnStdout: true, script: 'Write-Output "I love you!"')
     println someMessage
-
-
 
     }
     
