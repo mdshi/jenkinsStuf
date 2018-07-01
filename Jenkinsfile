@@ -28,7 +28,7 @@ node {
   // Now load 
 def externalMethod = evaluate readTrusted("stringInter.groovy")
 println externalMethod
-def externalyt = evaluate readTrusted("wipeClean.groovy")
+def externalyt = evaluate readTrusted("WipeClean.groovy")
 println externalyt
 
     }
