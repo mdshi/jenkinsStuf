@@ -1,57 +1,29 @@
-import jenkins.model.Jenkins
-
-String[] JOBS_TO_WIPE=[
-  "Hello1",
-  "Hello2"
-]
-
-
-void cleanNode(Node node, item_to_wipe) {
-  println("${node.name}:")
-
-  workspacePath = node.getWorkspaceFor(item_to_wipe)
-  if(!workspacePath){
-    println("    Failed to find workspace path on ${node.name}.")
-    return
-  }
-
-  pathAsString = workspacePath.getRemote()
-  if (workspacePath.exists())
-  {
-    try {
-      workspacePath.deleteRecursive()
-      println("    Deleted from location " + pathAsString)
-    }
-    catch(IOException e) {
-      println("    Failed to delete from location " + pathAsString)
-      throw e
-    }
-    
+def q = Jenkins.instance.queue
+q.items.each { q.cancel(it.task) }
+ 
+for (int i=0; i < Jenkins.instance.items.size(); i++) {
+  if(!killStuckBuilds(Jenkins.instance.items[i])){
+     println("Kill failed!")
   }
 }
-
-void wipeJob(String jobName) {
-  println("WIPING ${jobName}.")
-  println("--------------------------------------------.")
-
-  item_to_wipe = null
-  for (item in Jenkins.instance.items) {
-    if(item.name == jobName){
-      item_to_wipe = item
-      break
+def killStuckBuilds(job){
+  def result = true
+  def runningBuilds = getRunningBuilds(job)
+  def jobName = job.name
+  for(int j=0; j < runningBuilds.size(); j++){
+    int durationInSeconds = (System.currentTimeMillis() - runningBuilds[j].getTimeInMillis())/1000.0
+    result = false
+    def buildId = runningBuilds[j].id
+    println("Aborting ${jobName}-${buildId} which is running for ${durationInSeconds}s")
+    try{
+      runningBuilds[j].finish(hudson.model.Result.ABORTED, new java.io.IOException("Aborting build by long running jobs killer"));
+      result = true
+    }catch(e){
+      println("Error occured during aborting build: Exception: ${e}")
     }
   }
-  
-  if(!item_to_wipe){
-    println("Failed to find Job with name ${jobName}")
-  }
-  else {
-    for (node in Jenkins.instance.getNodes()) {
-        cleanNode(node, item_to_wipe)
-    }
-  }
+  return result
 }
-
-for (String jobName in JOBS_TO_WIPE) {
-  wipeJob(jobName)
+def getRunningBuilds(job){
+  return job.builds.findAll{build -> build.isBuilding()}
 }
