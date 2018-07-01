@@ -26,9 +26,7 @@ node {
     ''')
     println stdout
   // Now load 
-  evaluate(new File("./stringInter.groovy"))
-
-    def thing = new Thing()
-    
+def externalMethod = evaluate readTrusted("stringInter.groovy")
+println externalMethod
     }
 }
