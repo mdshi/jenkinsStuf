@@ -1,4 +1,7 @@
 node {
+    def externalyt = evaluate readTrusted("WipeClean.groovy")
+    println externalyt
+
     def msg = powershell(returnStdout: true, script: 'Write-Output "PowerShell is mighty!"')
     println msg
     def myname = "Mike Shiferaw"
@@ -28,8 +31,6 @@ node {
   // Now load 
 def externalMethod = evaluate readTrusted("stringInter.groovy")
 println externalMethod
-def externalyt = evaluate readTrusted("WipeClean.groovy")
-println externalyt
 
     }
 }
