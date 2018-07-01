@@ -24,7 +24,9 @@ void cleanNode(Node node, item_to_wipe) {
     }
     catch(IOException e) {
       println("    Failed to delete from location " + pathAsString)
+      throw e
     }
+    
   }
 }
 
