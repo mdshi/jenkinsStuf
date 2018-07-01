@@ -1,20 +1,59 @@
 import jenkins.model.Jenkins
 
-String [] Jobs_To_Be_Deleted = [
-    "Hello"
+String[] JOBS_TO_WIPE=[
+  "CueingMiddleware",
+  "CueingMiddlewareH",
+  "HardwareDetector",
+  "Hello1",
+  "Hello2",
+  "RemoteParker"  
 ]
 
-void cleanUPtheNodes(Node node, item_to_clean)
-{
-    println("${node.name}:")
 
-      workspacePath = node.getWorkspaceFor(item_to_wipe)
+void cleanNode(Node node, item_to_wipe) {
+  println("${node.name}:")
+
+  workspacePath = node.getWorkspaceFor(item_to_wipe)
   if(!workspacePath){
     println("    Failed to find workspace path on ${node.name}.")
     return
+  }
+
+  pathAsString = workspacePath.getRemote()
+  if (workspacePath.exists())
+  {
+    try {
+      workspacePath.deleteRecursive()
+      println("    Deleted from location " + pathAsString)
     }
+    catch(IOException e) {
+      println("    Failed to delete from location " + pathAsString)
+    }
+  }
+}
 
-    def mynameIs = "Mike"
+void wipeJob(String jobName) {
+  println("WIPING ${jobName}.")
+  println("--------------------------------------------.")
 
-    println ${mynameIs}
+  item_to_wipe = null
+  for (item in Jenkins.instance.items) {
+    if(item.name == jobName){
+      item_to_wipe = item
+      break
+    }
+  }
+  
+  if(!item_to_wipe){
+    println("Failed to find Job with name ${jobName}")
+  }
+  else {
+    for (node in Jenkins.instance.getNodes()) {
+        cleanNode(node, item_to_wipe)
+    }
+  }
+}
+
+for (String jobName in JOBS_TO_WIPE) {
+  wipeJob(jobName)
 }
