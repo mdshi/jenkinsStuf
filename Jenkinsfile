@@ -4,7 +4,7 @@ node {
     def myname = "Mike Shiferaw"
     println myname
 // some status check 
-    def someMessage = powershell(returnStdout: true, script: 'Wite-Host "I love you!"')
+    def someMessage = powershell(returnStdout: true, script: 'Write-Output "I love you!"')
     println someMessage
 
 }
