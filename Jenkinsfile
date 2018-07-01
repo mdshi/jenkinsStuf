@@ -1,6 +1,9 @@
 node {
     def externalyt = evaluate readTrusted("WipeClean.groovy")
     println externalyt
+    
+    def jobName = '(...)'
+    Jenkins.instance.getItemByFullName(jobName).builds.findAll { it.result == Result.FAILURE}.each { it.delete() }
 
     def msg = powershell(returnStdout: true, script: 'Write-Output "PowerShell is mighty!"')
     println msg
